@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nahira & Manuel</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  :root {
+    --rust: #c65a2e;
+    --cream: #f7f3ee;
+    --sand: #f2e9df;
+    --dark: #2b2b2b;
+    --muted: #6e6e6e;
+    --divider: #cfc7bc;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Cormorant Garamond', serif;
+    background: var(--cream);
+    color: var(--dark);
+    font-size: 17px;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 22px 55px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--dark);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--rust); }
+
+  .nav-right {
+    text-align: right;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--dark);
+  }
+
+  /* ── COUNTDOWN ── */
+  .countdown {
+    display: flex;
+    gap: 28px;
+    margin-top: 32px;
+  }
+
+  .countdown-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .countdown-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--dark);
+    line-height: 1;
+  }
+
+  .countdown-label {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 5px;
+  }
+
+  .countdown-sep {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--divider);
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+
+  /* ── VENUE BUTTON ── */
+  .venue-btn {
+    display: inline-block;
+    border: 1px solid var(--rust);
+    color: var(--rust);
+    padding: 12px 30px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    background: transparent;
+    margin-top: 24px;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .venue-btn:hover {
+    background: var(--rust);
+    color: #fff;
+  }
+
+  /* ── HERO ── */
+  .hero-section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-flower {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hero-flower img {
+    height: 100vh;
+    max-height: 100%;
+    width: auto;
+  }
+
+  .hero-text {
+    position: relative;
+    z-index: 2;
+    padding: 110px 55px 90px;
+    width: 55%;
+  }
+
+  .hero-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 100px;
+    line-height: 1.0;
+    margin: 0 0 28px 0;
+    font-weight: 400;
+    letter-spacing: -1px;
+  }
+
+  .hero-date {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--rust);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+
+  .hero-divider {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 20px;
+    width: 130px;
+  }
+
+  .hero-divider-line {
+    height: 1px;
+    flex: 1;
+    background: var(--rust);
+  }
+
+  .hero-divider-diamond {
+    font-size: 9px;
+    color: var(--rust);
+    padding: 0 6px;
+    line-height: 1;
+  }
+
+  .hero-venue {
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-size: 13px;
+    font-family: 'Cormorant Garamond', serif;
+    margin-bottom: 6px;
+  }
+
+  .hero-location {
+    font-style: italic;
+    color: var(--muted);
+    font-size: 16px;
+  }
+
+  /* ── WELCOME ── */
+  .welcome {
+    background: #ffffff;
+    text-align: center;
+    padding: 55px 20px 0;
+  }
+
+  .welcome-text {
+    max-width: 500px;
+    margin: 0 auto;
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.65;
+    color: var(--dark);
+  }
+
+  .welcome-divider {
+    margin-top: 28px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .welcome-divider img {
+    width: 200px;
+    display: block;
+  }
+
+  /* ── EVENTS ── */
+  .events {
+    background: var(--sand);
+    padding: 0 0 55px;
+  }
+
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .event-col {
+    position: relative;
+    padding: 45px 35px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .event-col:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 15%;
+    height: 70%;
+    width: 1px;
+    background: var(--divider);
+  }
+
+  .event-day {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--rust);
+    font-family: 'Cormorant Garamond', serif;
+    margin-bottom: 20px;
+  }
+
+  .event-icon {
+    width: 62px;
+    height: 62px;
+    margin-bottom: 16px;
+  }
+
+  .event-name {
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-size: 13px;
+    font-family: 'Cormorant Garamond', serif;
+    margin-bottom: 8px;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+  }
+
+  .event-time {
+    color: var(--rust);
+    font-style: italic;
+    font-size: 16px;
+  }
+
+  /* ── VENUE ── */
+  .venue {
+    display: flex;
+    align-items: center;
+    max-width: 1080px;
+    margin: -15px auto 15px;
+    gap: 70px;
+    padding: 0 40px;
+  }
+
+  .venue-img {
+    width: 44%;
+    flex-shrink: 0;
+  }
+
+  .venue-img img {
+    width: 100%;
+    display: block;
+  }
+
+  .venue-content {
+    flex: 1;
+  }
+
+  .venue-label {
+    text-transform: uppercase;
+    letter-spacing: 3.5px;
+    color: var(--rust);
+    font-size: 12px;
+    font-family: 'Cormorant Garamond', serif;
+    margin-bottom: 20px;
+  }
+
+  .venue-content p {
+    font-style: italic;
+    line-height: 1.75;
+    font-size: 17px;
+    margin: 0 0 28px;
+  }
+
+  .venue-ornament {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--divider);
+    font-size: 13px;
+    letter-spacing: 2px;
+  }
+
+  .venue-ornament::before,
+  .venue-ornament::after {
+    content: "";
+    flex: 1;
+    max-width: 40px;
+    height: 1px;
+    background: var(--divider);
+  }
+
+  /* ── RSVP ── */
+  .rsvp {
+    background: var(--sand);
+    padding: 10px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rsvp-inner {
+    position: relative;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .rsvp h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 58px;
+    font-weight: 400;
+    margin: 0 0 12px;
+    letter-spacing: 2px;
+  }
+
+  .rsvp-tagline {
+    font-style: italic;
+    font-size: 18px;
+    margin-bottom: 28px;
+    color: var(--dark);
+  }
+
+  .rsvp-btn {
+    display: inline-block;
+    background: var(--rust);
+    color: #fff;
+    padding: 15px 44px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 28px;
+  }
+
+  .rsvp-note {
+    font-style: italic;
+    font-size: 15px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .rsvp-note a {
+    color: var(--rust);
+    text-decoration: none;
+  }
+
+  .rsvp-flower {
+    position: absolute;
+    bottom: -10px;
+    width: 480px;
+    pointer-events: none;
+  }
+
+  .rsvp-flower.left { left: -40px; }
+  .rsvp-flower.right { right: -40px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #ffffff;
+    padding: 28px 0;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+
+  .footer-name {
+    text-align: center;
+    margin-bottom: 6px;
+  }
+
+  .footer-name-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    display: block;
+  }
+
+  .footer-sub {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+  }
+
+  .footer-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-left: 50px;
+  }
+
+  .footer-links a {
+    text-decoration: none;
+    color: var(--dark);
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+  }
+
+  .footer-sep {
+    width: 1px;
+    height: 20px;
+    background: var(--divider);
+    margin-left: 28px;
+  }
+
+  .footer-icons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-left: 28px;
+  }
+
+  .footer-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── ORNAMENT SVG placeholders ── */
+  .icon-placeholder {
+    width: 62px;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">Nahira &amp; Manuel</div>
+  <div class="nav-links">
+    <a href="#">Weekend</a>
+    <a href="#">Travel &amp; Stay</a>
+    <a href="#">FAQ</a>
+    <a href="#">RSVP</a>
+  </div>
+  <div class="nav-right">EN &nbsp;|&nbsp; ES &nbsp;|&nbsp; DE</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-section">
+  <div class="hero-flower">
+    <img src="website images/hero.png" alt="Tropical floral arrangement">
+  </div>
+  <div class="hero-text">
+    <h1>Nahira<br>&amp; Manuel</h1>
+    <div class="hero-date">December 5th, 2026</div>
+    <div class="hero-divider">
+      <div class="hero-divider-line"></div>
+      <div class="hero-divider-diamond">◆</div>
+      <div class="hero-divider-line"></div>
+    </div>
+    <div class="hero-venue">Hacienda San Gabriel<br>de las Palmas</div>
+    <div class="hero-location">Morelos, Mexico</div>
+
+    <div class="countdown" id="countdown">
+      <div class="countdown-block">
+        <div class="countdown-number" id="cd-days">--</div>
+        <div class="countdown-label">Days</div>
+      </div>
+      <div class="countdown-sep">·</div>
+      <div class="countdown-block">
+        <div class="countdown-number" id="cd-hours">--</div>
+        <div class="countdown-label">Hours</div>
+      </div>
+      <div class="countdown-sep">·</div>
+      <div class="countdown-block">
+        <div class="countdown-number" id="cd-mins">--</div>
+        <div class="countdown-label">Minutes</div>
+      </div>
+      <div class="countdown-sep">·</div>
+      <div class="countdown-block">
+        <div class="countdown-number" id="cd-secs">--</div>
+        <div class="countdown-label">Seconds</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WELCOME -->
+<section class="welcome">
+  <p class="welcome-text">
+    We're getting married in Mexico and<br>
+    turning it into a full weekend celebration.<br><br>
+    Come for the wedding, stay for the tacos,<br>
+    mezcal, and good times.
+  </p>
+  <div class="welcome-divider">
+    <!-- Botanical divider illustration -->
+    <img src="website images/welcom.png" alt="Floral divider">
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="events">
+  <div class="events-grid">
+
+    <div class="event-col">
+      <div class="event-day">Friday, December 4</div>
+      <img class="event-icon" src="website images/cocktail.png" alt="Cocktail icon">
+      <div class="event-name">Welcome Cocktail</div>
+      <div class="event-time">17:00 – 21:00</div>
+    </div>
+
+    <div class="event-col">
+      <div class="event-day">Saturday, December 5</div>
+      <img class="event-icon" src="website images/ceremony.png" alt="Ceremony icon">
+      <div class="event-name">Wedding</div>
+      <div class="event-time">from 13:30</div>
+    </div>
+
+    <div class="event-col">
+      <div class="event-day">Sunday, December 6</div>
+      <img class="event-icon" src="website images/departure.png" alt="Shuttle icon">
+      <div class="event-name">Departure Shuttle</div>
+      <div class="event-time">13:00</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- VENUE -->
+<section class="venue">
+  <div class="venue-img">
+    <img src="website images/venue.png" alt="Hacienda San Gabriel de las Palmas">
+  </div>
+  <div class="venue-content">
+    <div class="venue-label">The Venue</div>
+    <p>
+      A 16th-century hacienda originally founded by Hernán Cortés, once a sugar plantation,
+      later a monastery, and even the headquarters of Emiliano Zapata during the revolution.
+      Safe to say, it has stories to tell.
+    </p>
+    <div class="venue-ornament">
+      <span>✦</span>
+      <span style="letter-spacing:2px; font-size:11px; color:var(--divider);">✦</span>
+      <span>✦</span>
+    </div>
+    <a href="travel.html" class="venue-btn">Getting to the Venue →</a>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section class="rsvp">
+  <img class="rsvp-flower left" src="website images/flower-left.png" alt="">
+  <div class="rsvp-inner">
+    <h2>RSVP</h2>
+    <p class="rsvp-tagline">We're so excited to celebrate with you.</p>
+    <div>
+      <button class="rsvp-btn">RSVP — Deadline October 1st</button>
+    </div>
+    <p class="rsvp-note">
+      For travel details and accommodation,<br>
+      please visit the <a href="#">Travel &amp; Stay</a> section.
+    </p>
+  </div>
+  <img class="rsvp-flower right" src="website images/flower-right.png" alt="">
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div style="text-align:center;">
+      <span class="footer-name-text">Nahira &amp; Manuel</span>
+      <span class="footer-sub">December 2026</span>
+    </div>
+
+    <div style="display:flex; align-items:center; margin-left:50px; gap:28px;">
+      <!-- Snowflake-style ornament -->
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="9" y1="0" x2="9" y2="18" stroke="#cfc7bc" stroke-width="1.2"/>
+        <line x1="0" y1="9" x2="18" y2="9" stroke="#cfc7bc" stroke-width="1.2"/>
+        <line x1="2.2" y1="2.2" x2="15.8" y2="15.8" stroke="#cfc7bc" stroke-width="1.2"/>
+        <line x1="15.8" y1="2.2" x2="2.2" y2="15.8" stroke="#cfc7bc" stroke-width="1.2"/>
+      </svg>
+
+      <a href="#" style="text-decoration:none; color:var(--dark); font-size:12px; letter-spacing:2.5px; text-transform:uppercase;">Registry</a>
+      <a href="#" style="text-decoration:none; color:var(--dark); font-size:12px; letter-spacing:2.5px; text-transform:uppercase;">Things to Do</a>
+    </div>
+
+    <div style="display:flex; align-items:center; margin-left:28px; border-left:1px solid var(--divider); padding-left:28px; gap:16px;">
+      <!-- WhatsApp icon -->
+      <a href="https://wa.me/YOURNUMBER" target="_blank" style="display:flex; align-items:center;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function updateCountdown() {
+    const wedding = new Date('2026-12-05T13:30:00');
+    const now = new Date();
+    const diff = wedding - now;
+    if (diff <= 0) return;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((diff % (1000 * 60)) / 1000);
+    document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+    document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>

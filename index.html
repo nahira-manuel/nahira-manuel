@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nahira & Manuel</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: #f7f3ee;
+    font-family: 'Cormorant Garamond', serif;
+    color: #2b2b2b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  .gate {
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .gate h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 400;
+    margin: 0 0 8px;
+    line-height: 1.1;
+  }
+
+  .gate-date {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #c65a2e;
+    margin-bottom: 50px;
+  }
+
+  .gate-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    width: 100px;
+    margin: 0 auto 50px;
+  }
+
+  .gate-divider-line {
+    height: 1px;
+    flex: 1;
+    background: #c65a2e;
+  }
+
+  .gate-divider-diamond {
+    font-size: 8px;
+    color: #c65a2e;
+    padding: 0 6px;
+  }
+
+  input[type="password"] {
+    display: block;
+    width: 220px;
+    margin: 0 auto 16px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #cfc7bc;
+    padding: 10px 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    letter-spacing: 3px;
+    text-align: center;
+    color: #2b2b2b;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  input[type="password"]::placeholder {
+    color: #cfc7bc;
+    letter-spacing: 2px;
+    font-size: 13px;
+  }
+
+  input[type="password"]:focus {
+    border-bottom-color: #c65a2e;
+  }
+
+  .gate-btn {
+    display: inline-block;
+    background: transparent;
+    border: 1px solid #2b2b2b;
+    color: #2b2b2b;
+    padding: 11px 36px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    margin-top: 4px;
+  }
+
+  .gate-btn:hover {
+    background: #2b2b2b;
+    color: #f7f3ee;
+  }
+
+  .gate-error {
+    margin-top: 18px;
+    font-style: italic;
+    font-size: 14px;
+    color: #c65a2e;
+    opacity: 0;
+    transition: opacity 0.3s;
+    min-height: 20px;
+  }
+
+  .gate-error.show { opacity: 1; }
+
+</style>
+</head>
+<body>
+
+<div class="gate">
+  <h1>Nahira<br>&amp; Manuel</h1>
+  <div class="gate-date">December 5th, 2026</div>
+  <div class="gate-divider">
+    <div class="gate-divider-line"></div>
+    <div class="gate-divider-diamond">◆</div>
+    <div class="gate-divider-line"></div>
+  </div>
+
+  <input type="password" id="code-input" placeholder="enter your code" autocomplete="off">
+  <button class="gate-btn" onclick="checkCode()">Enter</button>
+  <div class="gate-error" id="error-msg">Incorrect code. Please try again.</div>
+</div>
+
+<script>
+  document.getElementById('code-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkCode();
+    document.getElementById('error-msg').classList.remove('show');
+  });
+
+  function checkCode() {
+    const input = document.getElementById('code-input').value.trim().toLowerCase();
+    if (input === 'nahiramanuel2026') {
+      window.location.href = 'nahira-manuel.html';
+    } else {
+      const err = document.getElementById('error-msg');
+      err.classList.add('show');
+      document.getElementById('code-input').value = '';
+      document.getElementById('code-input').focus();
+    }
+  }
+</script>
+
+</body>
+</html>
