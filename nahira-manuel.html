@@ -505,7 +505,8 @@
     justify-content: center;
   }
 
-  /* ── HAMBURGER ── */
+  .hero-flower img.desktop-flower { display: block; }
+  .hero-flower img.mobile-flower { display: none; }
   .hamburger {
     display: none;
     flex-direction: column;
@@ -572,41 +573,32 @@
     .nav-logo { display: none; }
     .hamburger { display: flex; order: -1; margin-right: auto; }
 
-    /* Hero: side-by-side, flower as tall cropped panel */
-    .hero-section {
-      display: flex;
-      align-items: stretch;
-      min-height: 560px;
-      overflow: hidden;
-      flex-direction: row-reverse;
-    }
-
-    .hero-text {
-      width: 50%;
-      padding: 28px 16px 40px 24px;
-      flex-shrink: 0;
-    }
-
-    .hero-text h1 {
-      font-size: 42px;
-      margin-bottom: 14px;
-    }
-
-    .hero-flower {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 50%;
-      height: 100%;
-      overflow: hidden;
-    }
+    .hero-flower { display: flex; width: 45%; }
 
     .hero-flower img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: left center;
+      object-position: center center;
       max-height: none;
+    }
+
+    .hero-flower img.desktop-flower { display: none; }
+    .hero-flower img.mobile-flower { display: block; }
+
+    .hero-section {
+      min-height: auto;
+      flex-direction: row;
+    }
+
+    .hero-text {
+      width: 55%;
+      padding: 28px 16px 40px 24px;
+    }
+
+    .hero-text h1 {
+      font-size: 48px;
+      margin-bottom: 18px;
     }
 
     .countdown {
@@ -709,7 +701,8 @@
 <!-- HERO -->
 <section class="hero-section">
   <div class="hero-flower">
-    <img src="website images/hero.png" alt="Tropical floral arrangement">
+    <img class="desktop-flower" src="website images/hero.png" alt="Tropical floral arrangement">
+    <img class="mobile-flower" src="website images/hero-mobile.png" alt="Tropical floral arrangement">
   </div>
   <div class="hero-text">
     <h1>Nahira<br>&amp; Manuel</h1>
