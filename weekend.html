@@ -364,6 +364,7 @@
   }
 
   .day-label-mobile { display: none; }
+  .day-label-desktop { display: block; }
 
   /* ── HAMBURGER ── */
   .hamburger {
@@ -444,9 +445,9 @@
     .page-header-dates { font-size: 12px; }
     .page-header-note { font-size: 13px; }
 
-    .day-label-desktop { display: none; }
+    .day-label-desktop { display: none !important; }
     .day-label-mobile {
-      display: block;
+      display: block !important;
       text-align: left;
       border-right: none;
       border-bottom: 1px solid var(--divider);
@@ -456,6 +457,11 @@
       letter-spacing: 3px;
       line-height: 1.6;
     }
+
+    .flower-bl { display: none !important; }
+    .closing { padding-bottom: 20px; margin-top: 20px; }
+
+    .day-section {
       grid-template-columns: 1fr;
       gap: 16px 0;
     }
