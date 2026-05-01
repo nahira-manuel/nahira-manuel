@@ -363,9 +363,152 @@
     text-align: center;
   }
 
+  /* ── HAMBURGER ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--dark);
+  }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--cream);
+    z-index: 100;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+  }
+
+  .mobile-menu.open { display: flex; }
+
+  .mobile-menu a {
+    text-decoration: none;
+    color: var(--dark);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .mobile-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--dark);
+    background: none;
+    border: none;
+    font-family: serif;
+    line-height: 1;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+
+    .nav {
+      grid-template-columns: auto 1fr;
+      padding: 16px 24px;
+    }
+
+    .nav-logo { display: none; }
+    .nav-links { display: none; }
+    .nav-right { display: none; }
+    .hamburger { display: flex; order: -1; }
+
+    .page { padding: 30px 24px 80px; }
+
+    .flower-tr { width: 220px; top: 0; right: -10px; }
+    .flower-bl { display: none; }
+
+    .page-header {
+      padding-right: 180px;
+      margin-bottom: 36px;
+    }
+
+    .page-header h1 { font-size: 38px; letter-spacing: 4px; }
+    .page-header-dates { font-size: 12px; }
+    .page-header-note { font-size: 13px; }
+
+    /* Stack day section — label becomes a simple header above */
+    .day-section {
+      grid-template-columns: 1fr;
+      gap: 16px 0;
+    }
+
+    .day-label {
+      text-align: left;
+      border-right: none;
+      border-bottom: 1px solid var(--divider);
+      padding-right: 0;
+      padding-bottom: 12px;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      line-height: 1;
+    }
+
+    .day-label span {
+      font-size: 28px !important;
+      line-height: 1;
+    }
+
+    .timeline-item {
+      grid-template-columns: 56px 30px 1fr;
+      margin-bottom: 28px;
+    }
+
+    .t-icon img {
+      width: 50px;
+      height: 50px;
+    }
+
+    .t-title { font-size: 13px; letter-spacing: 2px; }
+    .t-time { font-size: 15px; }
+    .t-desc { font-size: 14px; max-width: 100%; }
+
+    .closing p { font-size: 20px; }
+    .closing-sub { font-size: 14px; }
+
+    .footer-inner {
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+    }
+
+    .footer-inner > div { margin-left: 0 !important; }
+    .footer-inner > div[style*="border-left"] {
+      border-left: none !important;
+      padding-left: 0 !important;
+    }
+  }
+
 </style>
 </head>
 <body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMobileMenu()">✕</button>
+  <a href="nahira-manuel.html" onclick="closeMobileMenu()">Home</a>
+  <a href="weekend.html" onclick="closeMobileMenu()">Weekend</a>
+  <a href="travel.html" onclick="closeMobileMenu()">Travel &amp; Stay</a>
+  <a href="nahira-manuel.html#faq" onclick="closeMobileMenu()">FAQ</a>
+  <a href="nahira-manuel.html#rsvp" onclick="closeMobileMenu()">RSVP</a>
+  <div style="font-size:13px; letter-spacing:2px; color:var(--muted);">EN &nbsp;|&nbsp; ES &nbsp;|&nbsp; DE</div>
+</div>
 
 <!-- NAV -->
 <nav class="nav">
@@ -378,6 +521,9 @@
     <a href="nahira-manuel.html#rsvp">RSVP</a>
   </div>
   <div class="nav-right">EN &nbsp;|&nbsp; ES &nbsp;|&nbsp; DE</div>
+  <div class="hamburger" onclick="openMobileMenu()">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
 
 <div class="page">
@@ -579,6 +725,15 @@
     </div>
   </div>
 </footer>
+
+<script>
+  function openMobileMenu() {
+    document.getElementById('mobileMenu').classList.add('open');
+  }
+  function closeMobileMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+</script>
 
 </body>
 </html>
