@@ -570,36 +570,53 @@
     .nav-links { display: none; }
     .nav-right { display: none; }
     .nav-logo { display: none; }
-    .hamburger { display: flex; order: -1; }
+    .hamburger { display: flex; order: -1; margin-right: auto; }
+
+    /* Hero: side-by-side, flower as tall cropped panel */
+    .hero-section {
+      display: flex;
+      align-items: stretch;
+      min-height: 480px;
+      overflow: hidden;
+    }
 
     .hero-text {
       width: 58%;
-      padding: 28px 28px 40px;
+      padding: 28px 20px 40px 24px;
+      flex-shrink: 0;
     }
 
     .hero-text h1 {
-      font-size: 52px;
-      margin-bottom: 18px;
+      font-size: 48px;
+      margin-bottom: 14px;
     }
 
+    /* flower becomes a fixed right panel, full height, cropped */
     .hero-flower {
-      width: 45%;
-      opacity: 1;
+      position: relative;
+      width: 42%;
+      flex-shrink: 0;
+      overflow: hidden;
     }
 
     .hero-flower img {
-      height: auto;
-      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: auto;
+      max-height: none;
+      object-fit: cover;
     }
 
     .countdown {
-      gap: 14px;
-      margin-top: 20px;
+      gap: 10px;
+      margin-top: 18px;
     }
 
-    .countdown-number { font-size: 22px; }
+    .countdown-number { font-size: 20px; }
     .countdown-label { font-size: 7px; }
-    .countdown-sep { font-size: 18px; }
+    .countdown-sep { font-size: 16px; }
 
     .welcome { padding: 40px 24px 0; }
     .welcome-text { font-size: 17px; }
@@ -649,13 +666,13 @@
 
     .footer-inner > div { margin-left: 0 !important; }
 
+    /* hide ALL footer nav links and ornament on mobile, keep only whatsapp */
+    .footer-inner > div:nth-child(2) { display: none !important; }
+
     .footer-inner > div[style*="border-left"] {
       border-left: none !important;
       padding-left: 0 !important;
     }
-
-    /* hide footer nav links on mobile */
-    .footer-inner > div:nth-child(2) { display: none; }
   }
 
 </style>
