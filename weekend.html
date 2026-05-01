@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekend — Nahira & Manuel</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  :root {
+    --rust: #c65a2e;
+    --cream: #f7f3ee;
+    --sand: #f2e9df;
+    --dark: #2b2b2b;
+    --muted: #6e6e6e;
+    --divider: #cfc7bc;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Cormorant Garamond', serif;
+    background: var(--cream);
+    color: var(--dark);
+    font-size: 17px;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 22px 55px;
+    position: relative;
+    z-index: 10;
+    background: var(--cream);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: var(--dark);
+  }
+
+  .nav-links { display: flex; gap: 40px; }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--dark);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--rust); }
+  .nav-links a.active { color: var(--rust); }
+  .nav-right { text-align: right; font-size: 13px; letter-spacing: 2px; }
+
+  /* ── PAGE LAYOUT ── */
+  .page {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 60px 120px 120px;
+  }
+
+  /* ── CORNER FLOWERS ── */
+  .flower-tr {
+    position: absolute;
+    top: -20px;
+    right: -60px;
+    width: 580px;
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: multiply;
+  }
+
+  .flower-bl {
+    position: absolute;
+    bottom: 80px;
+    left: -30px;
+    width: 320px;
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: multiply;
+  }
+
+  /* ── CLOSING ── */
+  .closing {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    margin-top: 40px;
+    padding: 60px 0 40px;
+  }
+
+  .closing p {
+    font-style: italic;
+    font-size: 26px;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+
+  .closing-sub {
+    font-style: italic;
+    font-size: 17px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    display: block;
+  }
+
+  .closing-divider img {
+    width: 180px;
+    mix-blend-mode: multiply;
+  }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    text-align: left;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 70px;
+    padding-right: 480px;
+  }
+
+  .page-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    font-weight: 400;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    margin: 0 0 16px;
+    line-height: 1.05;
+  }
+
+  .page-header-dates {
+    color: var(--rust);
+    font-size: 15px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+
+  .page-header-note {
+    font-style: italic;
+    font-size: 16px;
+    color: var(--muted);
+    margin-top: 18px;
+    line-height: 1.6;
+  }
+
+  .header-divider {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: 120px;
+    margin: 0;
+  }
+
+  .header-divider-line {
+    height: 1px;
+    flex: 1;
+    background: var(--rust);
+  }
+
+  .header-divider-diamond {
+    font-size: 9px;
+    color: var(--rust);
+    padding: 0 6px;
+  }
+
+  /* ── DAY SECTION ── */
+  .day-section {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0 40px;
+  }
+
+  .day-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .day-divider-line {
+    flex: 1;
+    height: 1px;
+    background: var(--divider);
+  }
+
+  .day-divider-diamond {
+    font-size: 9px;
+    color: var(--rust);
+  }
+
+  /* Day label on the left side, stacked */
+  .day-label {
+    font-size: 15px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--rust);
+    text-align: right;
+    padding-right: 24px;
+    padding-top: 4px;
+    line-height: 1.8;
+    border-right: 1px solid var(--divider);
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Icon column */
+  .t-icon {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 2px;
+    background: transparent;
+  }
+
+  .t-icon img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    background: transparent;
+    mix-blend-mode: multiply;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 120px 40px 1fr;
+    align-items: start;
+    margin-bottom: 40px;
+  }
+
+  /* Dot + line column */
+  .t-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 8px;
+  }
+
+  .t-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--rust);
+    flex-shrink: 0;
+  }
+
+  .t-connector {
+    width: 1px;
+    flex: 1;
+    min-height: 60px;
+    background: var(--divider);
+    margin-top: 4px;
+  }
+
+  /* Last item has no connector */
+  .timeline-item:last-child .t-connector { display: none; }
+
+  /* Content column */
+  .t-content {
+    padding-left: 8px;
+    padding-bottom: 8px;
+  }
+
+  .t-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin: 0 0 6px;
+    color: var(--dark);
+  }
+
+  .t-time {
+    color: var(--rust);
+    font-style: italic;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .t-desc {
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--muted);
+    margin: 0;
+    max-width: 580px;
+  }
+
+  /* ── CLOSING LINE ── */
+  .closing {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    margin-top: 20px;
+  }
+
+  .closing p {
+    font-style: italic;
+    font-size: 22px;
+    color: var(--dark);
+    margin-bottom: 20px;
+  }
+
+  .closing-divider {
+    display: flex;
+    justify-content: center;
+  }
+
+  .closing-divider img {
+    width: 180px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #ffffff;
+    padding: 28px 0;
+    border-top: 1px solid var(--divider);
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .footer-name-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    display: block;
+    text-align: center;
+  }
+
+  .footer-sub {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    text-align: center;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="nahira-manuel.html">Nahira &amp; Manuel</a>
+  <div class="nav-links">
+    <a href="nahira-manuel.html">Home</a>
+    <a href="weekend.html" class="active">Weekend</a>
+    <a href="travel.html">Travel &amp; Stay</a>
+    <a href="nahira-manuel.html#faq">FAQ</a>
+    <a href="nahira-manuel.html#rsvp">RSVP</a>
+  </div>
+  <div class="nav-right">EN &nbsp;|&nbsp; ES &nbsp;|&nbsp; DE</div>
+</nav>
+
+<div class="page">
+
+  <!-- CORNER FLOWERS -->
+  <img class="flower-tr" src="website images/weekend-flower-tr.png" alt="">
+  <img class="flower-bl" src="website images/weekend-flower-bl.png" alt="">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <h1>Weekend Itinerary</h1>
+    <div class="page-header-dates">December 4 – 6, 2026</div>
+    <div class="header-divider">
+      <div class="header-divider-line"></div>
+      <div class="header-divider-diamond">◆</div>
+      <div class="header-divider-line"></div>
+    </div>
+    <p class="page-header-note">Please note that this schedule is preliminary<br>and may be subject to slight changes in the future.</p>
+  </div>
+
+  <!-- FRIDAY -->
+  <div class="day-section">
+    <div class="day-label">Friday<br>December<br><span style="font-size:42px; letter-spacing:0; font-family:'Playfair Display',serif; line-height:1;">4</span><br>2026</div>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="t-icon"><img src="website images/departure.png" alt="Shuttle"></div>
+        <div class="t-line"><div class="t-dot"></div><div class="t-connector"></div></div>
+        <div class="t-content">
+          <div class="t-title">Shuttle Mexico City to Morelos</div>
+          <div class="t-time">12:00 – 15:00</div>
+          <p class="t-desc">Shuttle will depart from a central location in Mexico City.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="t-icon"><img src="website images/departure.png" alt="Shuttle"></div>
+        <div class="t-line"><div class="t-dot"></div><div class="t-connector"></div></div>
+        <div class="t-content">
+          <div class="t-title">Shuttles from Hotels to Venue</div>
+          <div class="t-time">16:00</div>
+          <p class="t-desc">Shuttles will pick up guests staying at the recommended wedding hotels.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="t-icon"><img src="website images/cocktail.png" alt="Cocktail"></div>
+        <div class="t-line"><div class="t-dot"></div><div class="t-connector"></div></div>
+        <div class="t-content">
+          <div class="t-title">Welcome Cocktail</div>
+          <div class="t-time">17:00 – 21:00</div>
+          <p class="t-desc">Let's kick off the weekend! Join us for drinks, bites and good vibes to start the celebration.<br><br><em>Dress Code: Cocktail</em></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DIVIDER -->
+  <div class="day-divider">
+    <div class="day-divider-line"></div>
+    <div class="day-divider-diamond">◆</div>
+    <div class="day-divider-line"></div>
+  </div>
+
+  <!-- SATURDAY -->
+  <div class="day-section">
+    <div class="day-label">Saturday<br>December<br><span style="font-size:42px; letter-spacing:0; font-family:'Playfair Display',serif; line-height:1;">5</span><br>2026</div>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="t-icon"><img src="website images/departure.png" alt="Shuttle"></div>
+        <div class="t-line"><div class="t-dot"></div><div class="t-connector"></div></div>
+        <div class="t-content">
+          <div class="t-title">Shuttles from Hotels to Venue</div>
+          <div class="t-time">13:00</div>
+          <p class="t-desc">Shuttles will pick up guests staying at the recommended wedding hotels.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="t-icon"><img src="website images/ceremony.png" alt="Ceremony"></div>
+        <div class="t-line"><div class="t-dot"></div><div class="t-connector"></div></div>
+        <div class="t-content">
+          <div class="t-title">Wedding Ceremony</div>
+          <div class="t-time">14:00</div>
+          <p class="t-desc">The moment we've all been waiting for.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="t-icon"><img src="website images/cocktail.png" alt="Cocktail"></div>
+        <div class="t-line"><div class="t-dot"></div><div class="t-connector"></div></div>
+        <div class="t-content">
+          <div class="t-title">Cocktail</div>
+          <div class="t-time">15:00</div>
+          <p class="t-desc">Let's toast to love!</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="t-icon"><img src="website images/dinner.png" alt="Lunch"></div>
+        <div class="t-line"><div class="t-dot"></div><div class="t-connector"></div></div>
+        <div class="t-content">
+          <div class="t-title">Lunch</div>
+          <div class="t-time">16:00</div>
+          <p class="t-desc">A celebration of good food and even better company.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="t-icon"><img src="website images/party.png" alt="Party"></div>
+        <div class="t-line"><div class="t-dot"></div><div class="t-connector"></div></div>
+        <div class="t-content">
+          <div class="t-title">Party</div>
+          <div class="t-time">17:00</div>
+          <p class="t-desc">Dance, sing, laugh and celebrate with us!</p>
+          <div style="margin-top:16px; padding-top:14px; border-top:1px solid var(--divider);">
+            <div style="font-style:italic; font-size:15px; color:#9e9e9e; line-height:1.5;">Shuttles available from 19:00 hrs onwards — return shuttles will pick up guests at the recommended wedding hotels.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="t-icon"><img src="website images/surprise.png" alt="Surprise"></div>
+        <div class="t-line"><div class="t-dot"></div><div class="t-connector"></div></div>
+        <div class="t-content">
+          <div class="t-title">Surprise</div>
+          <div class="t-time">00:00 – 02:00</div>
+          <p class="t-desc">We have something special in store...</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- DIVIDER -->
+  <div class="day-divider">
+    <div class="day-divider-line"></div>
+    <div class="day-divider-diamond">◆</div>
+    <div class="day-divider-line"></div>
+  </div>
+
+  <!-- SUNDAY -->
+  <div class="day-section">
+    <div class="day-label">Sunday<br>December<br><span style="font-size:42px; letter-spacing:0; font-family:'Playfair Display',serif; line-height:1;">6</span><br>2026</div>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="t-icon"><img src="website images/departure.png" alt="Shuttle"></div>
+        <div class="t-line"><div class="t-dot"></div><div class="t-connector"></div></div>
+        <div class="t-content">
+          <div class="t-title">Shuttles from Hotels to Mexico City</div>
+          <div class="t-time">13:00</div>
+          <p class="t-desc">Shuttle will pick up guests staying at the recommended wedding hotels.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <p>We can't wait to celebrate with you!</p>
+    <span class="closing-sub">Thank you for being part of this special weekend.</span>
+    <div class="closing-divider">
+      <img src="website images/welcom.png" alt="">
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <span class="footer-name-text">Nahira &amp; Manuel</span>
+      <span class="footer-sub">December 2026</span>
+    </div>
+
+    <div style="display:flex; align-items:center; margin-left:50px; gap:28px;">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="9" y1="0" x2="9" y2="18" stroke="#cfc7bc" stroke-width="1.2"/>
+        <line x1="0" y1="9" x2="18" y2="9" stroke="#cfc7bc" stroke-width="1.2"/>
+        <line x1="2.2" y1="2.2" x2="15.8" y2="15.8" stroke="#cfc7bc" stroke-width="1.2"/>
+        <line x1="15.8" y1="2.2" x2="2.2" y2="15.8" stroke="#cfc7bc" stroke-width="1.2"/>
+      </svg>
+      <a href="#" style="text-decoration:none; color:var(--dark); font-size:12px; letter-spacing:2.5px; text-transform:uppercase;">Registry</a>
+      <a href="#" style="text-decoration:none; color:var(--dark); font-size:12px; letter-spacing:2.5px; text-transform:uppercase;">Things to Do</a>
+    </div>
+
+    <div style="display:flex; align-items:center; margin-left:28px; border-left:1px solid var(--divider); padding-left:28px;">
+      <a href="https://wa.me/YOURNUMBER" target="_blank" style="display:flex; align-items:center;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
