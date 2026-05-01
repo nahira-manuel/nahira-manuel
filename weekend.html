@@ -363,6 +363,8 @@
     text-align: center;
   }
 
+  .day-label-mobile { display: none; }
+
   /* ── HAMBURGER ── */
   .hamburger {
     display: none;
@@ -442,8 +444,18 @@
     .page-header-dates { font-size: 12px; }
     .page-header-note { font-size: 13px; }
 
-    /* Stack day section — label becomes a simple header above */
-    .day-section {
+    .day-label-desktop { display: none; }
+    .day-label-mobile {
+      display: block;
+      text-align: left;
+      border-right: none;
+      border-bottom: 1px solid var(--divider);
+      padding-right: 0;
+      padding-bottom: 12px;
+      font-size: 13px;
+      letter-spacing: 3px;
+      line-height: 1.6;
+    }
       grid-template-columns: 1fr;
       gap: 16px 0;
     }
@@ -454,15 +466,20 @@
       border-bottom: 1px solid var(--divider);
       padding-right: 0;
       padding-bottom: 12px;
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      line-height: 1;
+      display: block;
+      line-height: 1.6;
+      font-size: 13px;
     }
 
     .day-label span {
-      font-size: 28px !important;
-      line-height: 1;
+      font-size: 13px !important;
+      font-family: 'Cormorant Garamond', serif !important;
+      letter-spacing: 3px !important;
+      line-height: 1.6;
+    }
+
+    .page-header-note {
+      font-size: 13px;
     }
 
     .timeline-item {
@@ -489,6 +506,7 @@
     }
 
     .footer-inner > div { margin-left: 0 !important; }
+    .footer-inner > div:nth-child(2) { display: none !important; }
     .footer-inner > div[style*="border-left"] {
       border-left: none !important;
       padding-left: 0 !important;
@@ -541,12 +559,13 @@
       <div class="header-divider-diamond">◆</div>
       <div class="header-divider-line"></div>
     </div>
-    <p class="page-header-note">Please note that this schedule is preliminary<br>and may be subject to slight changes in the future.</p>
+    <p class="page-header-note">Please note that this schedule is preliminary and may be subject to slight changes in the future.</p>
   </div>
 
   <!-- FRIDAY -->
   <div class="day-section">
-    <div class="day-label">Friday<br>December<br><span style="font-size:42px; letter-spacing:0; font-family:'Playfair Display',serif; line-height:1;">4</span><br>2026</div>
+    <div class="day-label day-label-desktop">Friday<br>December<br><span style="font-size:42px; letter-spacing:0; font-family:'Playfair Display',serif; line-height:1;">4</span><br>2026</div>
+    <div class="day-label day-label-mobile">Friday, December 4, 2026</div>
     <div class="timeline">
 
       <div class="timeline-item">
@@ -591,7 +610,8 @@
 
   <!-- SATURDAY -->
   <div class="day-section">
-    <div class="day-label">Saturday<br>December<br><span style="font-size:42px; letter-spacing:0; font-family:'Playfair Display',serif; line-height:1;">5</span><br>2026</div>
+    <div class="day-label day-label-desktop">Saturday<br>December<br><span style="font-size:42px; letter-spacing:0; font-family:'Playfair Display',serif; line-height:1;">5</span><br>2026</div>
+    <div class="day-label day-label-mobile">Saturday, December 5, 2026</div>
     <div class="timeline">
 
       <div class="timeline-item">
@@ -670,7 +690,8 @@
 
   <!-- SUNDAY -->
   <div class="day-section">
-    <div class="day-label">Sunday<br>December<br><span style="font-size:42px; letter-spacing:0; font-family:'Playfair Display',serif; line-height:1;">6</span><br>2026</div>
+    <div class="day-label day-label-desktop">Sunday<br>December<br><span style="font-size:42px; letter-spacing:0; font-family:'Playfair Display',serif; line-height:1;">6</span><br>2026</div>
+    <div class="day-label day-label-mobile">Sunday, December 6, 2026</div>
     <div class="timeline">
 
       <div class="timeline-item">
