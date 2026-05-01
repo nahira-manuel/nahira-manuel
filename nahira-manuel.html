@@ -505,9 +505,163 @@
     justify-content: center;
   }
 
+  /* ── HAMBURGER ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 20;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--dark);
+    transition: all 0.3s;
+  }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--cream);
+    z-index: 100;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+  }
+
+  .mobile-menu.open { display: flex; }
+
+  .mobile-menu a {
+    text-decoration: none;
+    color: var(--dark);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .mobile-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--dark);
+    background: none;
+    border: none;
+    font-family: serif;
+    line-height: 1;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+
+    .nav {
+      grid-template-columns: 1fr auto;
+      padding: 16px 24px;
+    }
+
+    .nav-links { display: none; }
+    .nav-right { display: none; }
+    .hamburger { display: flex; }
+
+    .hero-text {
+      width: 100%;
+      padding: 40px 28px 48px;
+    }
+
+    .hero-text h1 {
+      font-size: 58px;
+      margin-bottom: 18px;
+    }
+
+    .hero-flower {
+      width: 55%;
+      opacity: 0.5;
+    }
+
+    .countdown {
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .countdown-number { font-size: 26px; }
+    .countdown-label { font-size: 8px; }
+
+    .welcome { padding: 40px 24px 0; }
+    .welcome-text { font-size: 17px; }
+
+    .events-grid {
+      grid-template-columns: 1fr;
+      max-width: 320px;
+    }
+
+    .event-col {
+      padding: 32px 20px;
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .event-col:not(:last-child)::after { display: none; }
+
+    .venue {
+      flex-direction: column;
+      gap: 24px;
+      margin: 32px auto;
+      padding: 0 28px;
+    }
+
+    .venue-img { width: 100%; }
+
+    .venue-content { width: 100%; }
+
+    .rsvp { padding: 40px 20px; }
+
+    .rsvp-flower {
+      width: 160px;
+      opacity: 0.4;
+    }
+
+    .rsvp h2 { font-size: 42px; }
+
+    .rsvp-btn {
+      font-size: 11px;
+      padding: 14px 24px;
+      letter-spacing: 2px;
+    }
+
+    .footer-inner {
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+    }
+
+    .footer-inner > div { margin-left: 0 !important; }
+
+    .footer-inner > div[style*="border-left"] {
+      border-left: none !important;
+      padding-left: 0 !important;
+    }
+  }
+
 </style>
 </head>
 <body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMobileMenu()">✕</button>
+  <a href="#" onclick="closeMobileMenu()">Weekend</a>
+  <a href="#" onclick="closeMobileMenu()">Travel &amp; Stay</a>
+  <a href="#" onclick="closeMobileMenu()">FAQ</a>
+  <a href="#" onclick="closeMobileMenu()">RSVP</a>
+  <div style="font-size:13px; letter-spacing:2px; color:var(--muted);">EN &nbsp;|&nbsp; ES &nbsp;|&nbsp; DE</div>
+</div>
 
 <!-- NAV -->
 <nav class="nav">
@@ -519,6 +673,9 @@
     <a href="#">RSVP</a>
   </div>
   <div class="nav-right">EN &nbsp;|&nbsp; ES &nbsp;|&nbsp; DE</div>
+  <div class="hamburger" onclick="openMobileMenu()">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -674,6 +831,13 @@
 </footer>
 
 <script>
+  function openMobileMenu() {
+    document.getElementById('mobileMenu').classList.add('open');
+  }
+  function closeMobileMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
   function updateCountdown() {
     const wedding = new Date('2026-12-05T13:30:00');
     const now = new Date();
