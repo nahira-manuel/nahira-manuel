@@ -309,7 +309,7 @@
     gap: 0;
     padding: 60px 0;
     border-bottom: 1px solid var(--divider);
-    align-items: stretch;
+    align-items: start;
   }
 
   .stay-city-text { grid-column: 1; padding-right: 60px; }
@@ -466,14 +466,14 @@
   }
 
   .closing p {
-    font-style: normal;
+    font-style: italic;
     font-size: 20px;
     color: var(--dark);
     margin-bottom: 6px;
   }
 
   .closing-sub {
-    font-style: normal;
+    font-style: italic;
     font-size: 16px;
     color: var(--muted);
     display: block;
@@ -530,10 +530,17 @@
     .inner { padding: 0 24px; }
     .getting-there { grid-template-columns: 1fr; gap: 28px; padding: 40px 0; }
     .stay-venue { grid-template-columns: 1fr; gap: 28px; padding: 40px 0; }
-    .stay-city { grid-template-columns: 1fr; gap: 20px; padding: 40px 0; }
+    .stay-city { grid-template-columns: 1fr; gap: 28px; padding: 40px 0; }
+    .stay-city > div[style*="border-left"] {
+      border-left: none !important;
+      padding-left: 0 !important;
+      border-top: 1px solid var(--divider);
+      padding-top: 28px;
+    }
+    .stay-city-text { padding-right: 0; }
     .city-illustration { display: none; }
     .bottom-cols { grid-template-columns: 1fr; gap: 36px; padding: 40px 0; }
-    .know-grid { grid-template-columns: 1fr; }
+    .good-to-know > div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
     .good-to-know { padding: 40px 0; }
     .closing { padding: 40px 20px; }
 
@@ -597,11 +604,9 @@
       <p>Hacienda San Gabriel de las Palmas is outside Mexico City. You will need to travel from Mexico City to the venue — about 90 minutes south.</p>
       <p>We strongly recommend using our <strong style="font-style:normal;">weekend shuttles</strong> rather than renting a car or taking taxis.</p>
     </div>
-    <div>
+    <div style="display:flex; flex-direction:column;">
       <img src="website images/map.png" alt="Map to Hacienda San Gabriel de las Palmas" style="width:100%; display:block;">
-      <div style="margin-top:10px; text-align:left;">
-        <a class="map-link" href="https://maps.google.com/?q=Hacienda+San+Gabriel+de+las+Palmas,+Amanalco+de+Becerra,+Morelos" target="_blank">Open in Google Maps →</a>
-      </div>
+      <a class="map-link" href="https://maps.google.com/?q=Hacienda+San+Gabriel+de+las+Palmas,+Amanalco+de+Becerra,+Morelos" target="_blank" style="margin-top:10px; align-self:flex-start;">Open in Google Maps →</a>
     </div>
   </div>
 
@@ -707,7 +712,7 @@
     </div>
 
     <div style="border-left: 1px solid var(--divider); padding-left: 60px; display:flex; flex-direction:column; justify-content:flex-start;">
-      <div style="margin-top: 78px;">
+      <div>
         <div class="s-title">Avoid Staying:</div>
         <div class="s-divider"></div>
       </div>
