@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel & Stay — Nahira & Manuel</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  :root {
+    --rust: #c65a2e;
+    --cream: #f7f3ee;
+    --sand: #f2e9df;
+    --dark: #2b2b2b;
+    --muted: #6e6e6e;
+    --divider: #cfc7bc;
+    --white: #ffffff;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Cormorant Garamond', serif;
+    background: var(--cream);
+    color: var(--dark);
+    font-size: 17px;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 22px 55px;
+    background: var(--cream);
+    position: relative;
+    z-index: 10;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: var(--dark);
+  }
+
+  .nav-links { display: flex; gap: 40px; }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--dark);
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--rust); }
+  .nav-links a.active { color: var(--rust); }
+  .nav-right { text-align: right; font-size: 13px; letter-spacing: 2px; }
+
+  /* ── HAMBURGER ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--dark); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--cream);
+    z-index: 100;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    text-decoration: none;
+    color: var(--dark);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+  .mobile-close {
+    position: absolute;
+    top: 24px; right: 24px;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--dark);
+    background: none;
+    border: none;
+    font-family: serif;
+    line-height: 1;
+  }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    text-align: center;
+    padding: 80px 20px 70px;
+    position: relative;
+    overflow: hidden;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header-flower-left {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: auto;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+
+  .header-flower-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: auto;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+
+  .page-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 70px;
+    font-weight: 400;
+    margin: 0 0 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header-diamond {
+    color: var(--rust);
+    font-size: 14px;
+    display: block;
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .page-header p {
+    font-style: italic;
+    color: var(--muted);
+    font-size: 18px;
+    max-width: 420px;
+    margin: 0 auto;
+    line-height: 1.65;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── INNER WRAPPER ── */
+  .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 80px;
+  }
+
+  /* ── SECTION TITLES ── */
+  .s-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 12px;
+    font-weight: 400;
+  }
+
+  .s-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--rust);
+    margin-bottom: 28px;
+    position: relative;
+  }
+
+  .s-divider::after {
+    content: "◆";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -8px;
+    font-size: 8px;
+    color: var(--rust);
+    background: var(--cream);
+    padding: 0 3px;
+  }
+
+  /* ── GETTING THERE ── */
+  .getting-there {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 80px;
+    padding: 60px 0;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .getting-there-text p {
+    font-style: normal;
+    line-height: 1.75;
+    font-size: 15px;
+    margin: 0 0 14px;
+    color: var(--dark);
+  }
+
+  .getting-there-text .avoid {
+    color: var(--rust);
+    font-style: normal;
+    font-size: 15px;
+    letter-spacing: 0;
+    font-weight: 400;
+  }
+
+  .map-embed {
+    width: 100%;
+    height: 280px;
+    border: 1px solid var(--divider);
+    border-radius: 2px;
+  }
+
+  .map-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--rust);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rust);
+    padding-bottom: 1px;
+  }
+
+  /* ── WHERE TO STAY NEAR VENUE ── */
+  .stay-venue {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 60px;
+    padding: 60px 0;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .stay-venue-text p {
+    font-style: normal;
+    line-height: 1.75;
+    font-size: 15px;
+    margin: 0 0 14px;
+    color: var(--dark);
+  }
+
+  .hotel-list { list-style: none; padding: 0; margin: 0; }
+
+  .hotel-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .hotel-list li:last-child { border-bottom: none; }
+
+  .hotel-icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .hotel-icon svg { width: 20px; height: 20px; }
+
+  .hotel-info-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    margin-bottom: 3px;
+  }
+
+  .hotel-info-dist {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .hotel-info-link {
+    font-size: 12px;
+    color: var(--rust);
+    text-decoration: none;
+    letter-spacing: 1px;
+  }
+
+  /* ── WHERE TO STAY MEXICO CITY ── */
+  .stay-city {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    padding: 60px 0;
+    border-bottom: 1px solid var(--divider);
+    align-items: stretch;
+  }
+
+  .stay-city-text { grid-column: 1; padding-right: 60px; }
+  .stay-city-text p {
+    font-style: normal;
+    line-height: 1.75;
+    font-size: 15px;
+    margin: 0 0 14px;
+  }
+
+  .avoid-list { grid-column: 2; }
+  .avoid-list-title {
+    font-size: 13px;
+    color: var(--rust);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-style: normal;
+  }
+
+  .avoid-list ul {
+    list-style: none;
+    padding: 0; margin: 0;
+  }
+
+  .avoid-list ul li {
+    font-style: normal;
+    font-size: 15px;
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 8px;
+    color: var(--dark);
+    line-height: 1.5;
+  }
+
+  .avoid-list ul li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--divider);
+  }
+
+  .city-illustration {
+    grid-column: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.25;
+  }
+
+  /* ── BOTTOM THREE COLUMNS ── */
+  .bottom-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    padding: 60px 0;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .col-icon {
+    margin-bottom: 16px;
+  }
+
+  .col-icon svg { width: 28px; height: 28px; stroke: var(--rust); }
+
+  .col-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 10px;
+    font-weight: 400;
+  }
+
+  .col-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--rust);
+    margin-bottom: 20px;
+  }
+
+  .col-body p {
+    font-style: normal;
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--dark);
+    margin: 0 0 10px;
+  }
+
+  .col-body ul {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0 0;
+  }
+
+  .col-body ul li {
+    font-style: normal;
+    font-size: 15px;
+    line-height: 1.75;
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 6px;
+    color: var(--dark);
+    list-style: none;
+  }
+
+  .col-body ul li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--divider);
+  }
+
+  /* ── GOOD TO KNOW ── */
+  .good-to-know {
+    padding: 60px 0;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .know-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 8px;
+  }
+
+  .know-card {
+    background: var(--white);
+    border: 1px solid var(--divider);
+    padding: 24px 26px;
+  }
+
+  .know-title {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 12px;
+  }
+
+  .know-card p {
+    font-style: normal;
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--dark);
+    margin: 0;
+  }
+
+  /* ── CLOSING ── */
+  .closing {
+    text-align: center;
+    padding: 60px 20px;
+  }
+
+  .closing p {
+    font-style: normal;
+    font-size: 20px;
+    color: var(--dark);
+    margin-bottom: 6px;
+  }
+
+  .closing-sub {
+    font-style: normal;
+    font-size: 16px;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 24px;
+  }
+
+  .closing-divider img {
+    width: 160px;
+    mix-blend-mode: multiply;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--white);
+    padding: 28px 0;
+    border-top: 1px solid var(--divider);
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .footer-name-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    display: block;
+    text-align: center;
+  }
+
+  .footer-sub {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    text-align: center;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    .nav { grid-template-columns: auto 1fr; padding: 16px 24px; }
+    .nav-logo { display: none; }
+    .nav-links { display: none; }
+    .nav-right { display: none; }
+    .hamburger { display: flex; order: -1; }
+
+    .page-header { padding: 40px 20px 36px; }
+    .page-header h1 { font-size: 42px; }
+    .header-flower-left, .header-flower-right { height: 140px; width: auto; }
+
+    .inner { padding: 0 24px; }
+    .getting-there { grid-template-columns: 1fr; gap: 28px; padding: 40px 0; }
+    .stay-venue { grid-template-columns: 1fr; gap: 28px; padding: 40px 0; }
+    .stay-city { grid-template-columns: 1fr; gap: 20px; padding: 40px 0; }
+    .city-illustration { display: none; }
+    .bottom-cols { grid-template-columns: 1fr; gap: 36px; padding: 40px 0; }
+    .know-grid { grid-template-columns: 1fr; }
+    .good-to-know { padding: 40px 0; }
+    .closing { padding: 40px 20px; }
+
+    .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+    .footer-inner > div { margin-left: 0 !important; }
+    .footer-inner > div:nth-child(2) { display: none !important; }
+    .footer-inner > div[style*="border-left"] { border-left: none !important; padding-left: 0 !important; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMobileMenu()">✕</button>
+  <a href="nahira-manuel.html" onclick="closeMobileMenu()">Home</a>
+  <a href="weekend.html" onclick="closeMobileMenu()">Weekend</a>
+  <a href="travel.html" onclick="closeMobileMenu()">Travel &amp; Stay</a>
+  <a href="nahira-manuel.html#faq" onclick="closeMobileMenu()">FAQ</a>
+  <a href="nahira-manuel.html#rsvp" onclick="closeMobileMenu()">RSVP</a>
+  <a href="#" onclick="closeMobileMenu()">Registry</a>
+  <a href="#" onclick="closeMobileMenu()">Things to Do</a>
+  <div style="font-size:13px; letter-spacing:2px; color:var(--muted);">EN &nbsp;|&nbsp; ES &nbsp;|&nbsp; DE</div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="nahira-manuel.html">Nahira &amp; Manuel</a>
+  <div class="nav-links">
+    <a href="nahira-manuel.html">Home</a>
+    <a href="weekend.html">Weekend</a>
+    <a href="travel.html" class="active">Travel &amp; Stay</a>
+    <a href="nahira-manuel.html#faq">FAQ</a>
+    <a href="nahira-manuel.html#rsvp">RSVP</a>
+  </div>
+  <div class="nav-right">EN &nbsp;|&nbsp; ES &nbsp;|&nbsp; DE</div>
+  <div class="hamburger" onclick="openMobileMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <img class="header-flower-left" src="website images/travel-flower-left.png" alt="">
+  <img class="header-flower-right" src="website images/travel-flower-right.png" alt="">
+  <h1>Travel &amp; Stay</h1>
+  <span class="header-diamond">◆</span>
+  <p>All the information you need to plan your trip and enjoy the weekend with us in Mexico.</p>
+</div>
+
+<div class="inner">
+
+  <!-- GETTING THERE -->
+  <div class="getting-there">
+    <div class="getting-there-text">
+      <div class="s-title">Getting There</div>
+      <div class="s-divider"></div>
+      <p>The nearest airport is <strong style="font-style:normal;">Mexico City International Airport (AICM / MEX)</strong>.</p>
+      <p><span class="avoid">Avoid AIFA</span> — it's farther away and has very limited transport options.</p>
+      <p>Hacienda San Gabriel de las Palmas is outside Mexico City. You will need to travel from Mexico City to the venue — about 90 minutes south.</p>
+      <p>We strongly recommend using our <strong style="font-style:normal;">weekend shuttles</strong> rather than renting a car or taking taxis.</p>
+    </div>
+    <div>
+      <img src="website images/map.png" alt="Map to Hacienda San Gabriel de las Palmas" style="width:100%; display:block;">
+      <div style="margin-top:10px; text-align:left;">
+        <a class="map-link" href="https://maps.google.com/?q=Hacienda+San+Gabriel+de+las+Palmas,+Amanalco+de+Becerra,+Morelos" target="_blank">Open in Google Maps →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHERE TO STAY NEAR VENUE -->
+  <div class="stay-venue">
+    <div class="stay-venue-text">
+      <div class="s-title">Where to Stay <span style="font-size:10px; letter-spacing:2px;">(Near the Venue)</span></div>
+      <div class="s-divider"></div>
+      <p>We kindly ask guests to stay at one of the recommended hotels, as <strong style="font-style:normal;">transportation to and from all events will be organized from these locations.</strong></p>
+      <p>Please book as soon as possible to ensure availability. If you're unable to find a place, feel free to reach out — we're happy to help.</p>
+    </div>
+    <div>
+      <ul class="hotel-list">
+        <li>
+          <div class="hotel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c65a2e" stroke-width="1.3" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="hotel-info-name">Soul Spring Sanctuary</div>
+            <div class="hotel-info-dist">~10–12 min · 6 km from venue</div>
+            <a class="hotel-info-link" href="https://soulspring.world/soulspringsanctuary/" target="_blank">soulspring.world</a>
+          </div>
+        </li>
+        <li>
+          <div class="hotel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c65a2e" stroke-width="1.3" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="hotel-info-name">Vlú Hotel Tequesquitengo</div>
+            <div class="hotel-info-dist">~20–25 min · 18 km from venue</div>
+            <a class="hotel-info-link" href="https://vlu.mx/" target="_blank">vlu.mx</a>
+          </div>
+        </li>
+        <li>
+          <div class="hotel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c65a2e" stroke-width="1.3" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="hotel-info-name">Excelaris Grand Resort &amp; Spa</div>
+            <div class="hotel-info-dist">~25–30 min · 20 km from venue</div>
+            <a class="hotel-info-link" href="https://excelarisgrandresort.com/" target="_blank">excelarisgrandresort.com</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <ul class="hotel-list">
+        <li>
+          <div class="hotel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c65a2e" stroke-width="1.3" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="hotel-info-name">Villa Béjar &amp; Spa</div>
+            <div class="hotel-info-dist">~20–25 min · 18 km from venue</div>
+            <a class="hotel-info-link" href="https://www.villabejar.mx/tequesquitengo" target="_blank">villabejar.mx</a>
+          </div>
+        </li>
+        <li>
+          <div class="hotel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c65a2e" stroke-width="1.3" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="hotel-info-name">Hotel Hacienda Vista Hermosa</div>
+            <div class="hotel-info-dist">~15–20 min · 12 km from venue</div>
+            <a class="hotel-info-link" href="https://www.haciendavistahermosa.com.mx/" target="_blank">haciendavistahermosa.com.mx</a>
+          </div>
+        </li>
+        <li>
+          <div class="hotel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c65a2e" stroke-width="1.3" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="hotel-info-name">Hotel La Casa Del Guamuchil</div>
+            <div class="hotel-info-dist">~20–25 min · 18 km from venue</div>
+            <a class="hotel-info-link" href="https://www.lacasadelguamuchil.com/" target="_blank">lacasadelguamuchil.com</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- WHERE TO STAY MEXICO CITY -->
+  <div class="stay-city">
+    <div class="stay-city-text">
+      <div class="s-title">Where to Stay in Mexico City</div>
+      <div class="s-divider"></div>
+      <ul style="list-style:none; padding:0; margin:0 0 14px;">
+        <li style="font-size:15px; padding-left:14px; position:relative; margin-bottom:10px; color:var(--dark);">
+          <span style="position:absolute; left:0; color:var(--divider);">—</span>Roma
+        </li>
+        <li style="font-size:15px; padding-left:14px; position:relative; margin-bottom:10px; color:var(--dark);">
+          <span style="position:absolute; left:0; color:var(--divider);">—</span>Condesa
+        </li>
+        <li style="font-size:15px; padding-left:14px; position:relative; margin-bottom:10px; color:var(--dark);">
+          <span style="position:absolute; left:0; color:var(--divider);">—</span>Polanco
+        </li>
+        <li style="font-size:15px; padding-left:14px; position:relative; margin-bottom:10px; color:var(--dark);">
+          <span style="position:absolute; left:0; color:var(--divider);">—</span>Coyoacán / San Ángel (further but very nice)
+        </li>
+      </ul>
+      <p>Airbnb and hotels are both great options.</p>
+    </div>
+
+    <div style="border-left: 1px solid var(--divider); padding-left: 60px; display:flex; flex-direction:column; justify-content:flex-start;">
+      <div style="margin-top: 78px;">
+        <div class="s-title">Avoid Staying:</div>
+        <div class="s-divider"></div>
+      </div>
+      <ul style="list-style:none; padding:0; margin:0;">
+        <li style="font-size:15px; padding-left:14px; position:relative; margin-bottom:10px; color:var(--dark);">
+          <span style="position:absolute; left:0; color:var(--divider);">—</span>Near the airport
+        </li>
+        <li style="font-size:15px; padding-left:14px; position:relative; margin-bottom:10px; color:var(--dark);">
+          <span style="position:absolute; left:0; color:var(--divider);">—</span>Historic center
+        </li>
+        <li style="font-size:15px; padding-left:14px; position:relative; margin-bottom:10px; color:var(--dark);">
+          <span style="position:absolute; left:0; color:var(--divider);">—</span>Santa Fe (traffic, not much to do)
+        </li>
+      </ul>
+    </div>
+
+    <div style="display:flex; align-items:center; justify-content:center;">
+      <img src="website images/cdmx.png" alt="Mexico City" style="width:100%; max-height:300px; object-fit:contain; mix-blend-mode:multiply;">
+    </div>
+  </div>
+
+  <!-- GOOD TO KNOW -->
+  <div class="good-to-know">
+    <div class="s-title">Good to Know</div>
+    <div class="s-divider"></div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:40px;">
+
+      <div>
+        <div class="col-icon">
+          <img src="website images/transport.png" alt="Transport" style="width:48px; height:48px; object-fit:contain; mix-blend-mode:multiply;">
+        </div>
+        <div class="col-title">Transport</div>
+        <div class="col-divider"></div>
+        <div class="col-body">
+          <p>We will provide shuttles throughout the weekend — we strongly recommend using those.</p>
+          <p>When moving around Mexico City, use <strong>Uber</strong>, not taxis from the street.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="col-icon">
+          <img src="website images/safety.png" alt="Safety" style="width:48px; height:48px; object-fit:contain; mix-blend-mode:multiply;">
+        </div>
+        <div class="col-title">Safety</div>
+        <div class="col-divider"></div>
+        <div class="col-body">
+          <ul>
+            <li>Use Uber instead of street taxis</li>
+            <li>Do not display phones or valuables openly</li>
+            <li>Avoid taking Ubers alone late at night</li>
+            <li>Use ATMs inside banks or hotels</li>
+            <li>Stick to well-lit areas</li>
+            <li>Share your location when traveling</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <div class="col-icon">
+          <img src="website images/water.png" alt="Food and Water" style="width:48px; height:48px; object-fit:contain; mix-blend-mode:multiply;">
+        </div>
+        <div class="col-title">Food &amp; Water</div>
+        <div class="col-divider"></div>
+        <div class="col-body">
+          <p>A small heads up so you can fully enjoy the weekend — "Moctezuma's Revenge" is real, and we'd prefer you not experience it.</p>
+          <ul>
+            <li>Avoid drinking tap water</li>
+            <li>Skip ice in drinks</li>
+            <li>Avoid raw fruits and vegetables unless from trusted places</li>
+            <li>Avoid street food (even if tempting)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <div class="col-icon">
+          <img src="website images/currency.png" alt="Currency" style="width:48px; height:48px; object-fit:contain; mix-blend-mode:multiply;">
+        </div>
+        <div class="col-title">Currency</div>
+        <div class="col-divider"></div>
+        <div class="col-body">
+          <p>Mexico uses the <strong>Mexican Peso (MXN)</strong>. We recommend exchanging some money before or upon arrival.</p>
+          <p>Have both card and cash available — most venues accept cards, but cash is useful for tips, markets, and smaller spots.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="col-icon">
+          <img src="website images/insurance.png" alt="Travel Insurance" style="width:48px; height:48px; object-fit:contain; mix-blend-mode:multiply;">
+        </div>
+        <div class="col-title">Travel Insurance</div>
+        <div class="col-divider"></div>
+        <div class="col-body">
+          <p>Recommended. Covers flights, medical, and luggage — always worth it for international trips.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="col-icon">
+          <img src="website images/connectivity.png" alt="Connectivity" style="width:48px; height:48px; object-fit:contain; mix-blend-mode:multiply;">
+        </div>
+        <div class="col-title">Connectivity</div>
+        <div class="col-divider"></div>
+        <div class="col-body">
+          <p>Install an <strong>eSIM before arrival</strong> — Airalo works great. Alternatively, buy a SIM card at any OXXO (Mexican convenience stores found everywhere).</p>
+          <p>Also install <strong>WhatsApp</strong> — it's the main communication tool in Mexico.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- CLOSING -->
+<div class="closing">
+  <p>If you have any travel questions,</p>
+  <span class="closing-sub">feel free to reach out to us. We're here to help!</span>
+  <a href="https://wa.me/YOURNUMBER" target="_blank" style="display:inline-flex; align-items:center; gap:10px; border:1px solid var(--dark); color:var(--dark); padding:13px 36px; font-family:'Cormorant Garamond',serif; font-size:13px; letter-spacing:3px; text-transform:uppercase; text-decoration:none; margin-bottom:32px; transition:background 0.2s, color 0.2s;">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+    </svg>
+    Message us on WhatsApp
+  </a>
+  <div class="closing-divider">
+    <img src="website images/welcom.png" alt="">
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <span class="footer-name-text">Nahira &amp; Manuel</span>
+      <span class="footer-sub">December 2026</span>
+    </div>
+    <div style="display:flex; align-items:center; margin-left:50px; gap:28px;">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <line x1="9" y1="0" x2="9" y2="18" stroke="#cfc7bc" stroke-width="1.2"/>
+        <line x1="0" y1="9" x2="18" y2="9" stroke="#cfc7bc" stroke-width="1.2"/>
+        <line x1="2.2" y1="2.2" x2="15.8" y2="15.8" stroke="#cfc7bc" stroke-width="1.2"/>
+        <line x1="15.8" y1="2.2" x2="2.2" y2="15.8" stroke="#cfc7bc" stroke-width="1.2"/>
+      </svg>
+      <a href="#" style="text-decoration:none; color:var(--dark); font-size:12px; letter-spacing:2.5px; text-transform:uppercase;">Registry</a>
+      <a href="#" style="text-decoration:none; color:var(--dark); font-size:12px; letter-spacing:2.5px; text-transform:uppercase;">Things to Do</a>
+    </div>
+    <div style="display:flex; align-items:center; margin-left:28px; border-left:1px solid var(--divider); padding-left:28px;">
+      <a href="https://wa.me/YOURNUMBER" target="_blank" style="display:flex; align-items:center;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function openMobileMenu() { document.getElementById('mobileMenu').classList.add('open'); }
+  function closeMobileMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
+</script>
+
+</body>
+</html>
