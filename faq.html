@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — Nahira & Manuel</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  :root {
+    --rust: #c65a2e;
+    --cream: #f7f3ee;
+    --sand: #f2e9df;
+    --dark: #2b2b2b;
+    --muted: #6e6e6e;
+    --divider: #cfc7bc;
+    --white: #ffffff;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Cormorant Garamond', serif;
+    background: var(--cream);
+    color: var(--dark);
+    font-size: 15px;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 22px 55px;
+    background: var(--cream);
+    position: relative;
+    z-index: 10;
+  }
+  .nav-logo { font-family:'Playfair Display',serif; font-size:15px; letter-spacing:1px; text-decoration:none; color:var(--dark); }
+  .nav-links { display:flex; gap:40px; }
+  .nav-links a { text-decoration:none; color:var(--dark); font-size:13px; letter-spacing:3px; text-transform:uppercase; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--rust); }
+  .nav-links a.active { color:var(--rust); }
+  .nav-right { text-align:right; font-size:13px; letter-spacing:2px; }
+
+  /* ── HAMBURGER ── */
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; }
+  .hamburger span { display:block; width:22px; height:1.5px; background:var(--dark); }
+  .mobile-menu { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:var(--cream); z-index:100; flex-direction:column; align-items:center; justify-content:center; gap:36px; }
+  .mobile-menu.open { display:flex; }
+  .mobile-menu a { text-decoration:none; color:var(--dark); font-family:'Cormorant Garamond',serif; font-size:18px; letter-spacing:4px; text-transform:uppercase; }
+  .mobile-close { position:absolute; top:24px; right:24px; font-size:28px; cursor:pointer; color:var(--dark); background:none; border:none; font-family:serif; line-height:1; }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    padding: 50px 80px 50px;
+    position: relative;
+    overflow: visible;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .page-header-label { font-size:11px; letter-spacing:4px; text-transform:uppercase; color:var(--rust); margin-bottom:12px; }
+
+  .page-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 110px;
+    font-weight: 400;
+    margin: 0 0 10px;
+    line-height: 1;
+    color: var(--dark);
+  }
+
+  .header-divider { display:flex; align-items:center; width:120px; margin-bottom:24px; }
+  .header-divider-line { height:1px; flex:1; background:var(--rust); }
+  .header-divider-diamond { font-size:8px; color:var(--rust); padding:0 5px; }
+
+  .page-header p { font-style:italic; color:var(--muted); font-size:18px; max-width:340px; line-height:1.65; margin:0; }
+
+  .page-header-flower {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .page-header-flower img {
+    max-height: 440px;
+    width: auto;
+    mix-blend-mode: multiply;
+    object-fit: contain;
+  }
+
+  /* ── PAGE BODY ── */
+  .page-body {
+    max-width: 100%;
+    margin: 0;
+    padding: 0 80px 80px;
+  }
+
+  /* ── SECTION HEADER (matches travel page) ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 36px;
+    margin-top: 60px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--dark);
+    flex-shrink: 0;
+  }
+
+  /* add diamond to section line */
+  .section-line {
+    flex:1;
+    height:1px;
+    background:var(--divider);
+    position: relative;
+  }
+
+  /* ── FAQ ITEM (white cards) ── */
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .faq-item {
+    background: var(--white);
+    border: 1px solid var(--divider);
+    padding: 34px 32px;
+  }
+
+  .faq-full {
+    background: var(--white);
+    border: 1px solid var(--divider);
+    padding: 28px 32px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .faq-full .item-header { margin-bottom: 0; flex-shrink: 0; }
+  .faq-full .item-body { margin: 0; }
+
+  .faq-grid.last-row { margin-bottom: 0; }
+
+  /* ── ITEM HEADER ── */
+  .item-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .item-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    mix-blend-mode: multiply;
+  }
+
+  .item-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+
+  .item-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--rust);
+    font-weight: 400;
+    line-height: 1.3;
+  }
+
+  /* ── ITEM BODY ── */
+  .item-body { font-size:15px; line-height:1.8; color:var(--dark); }
+  .item-body p { margin:0 0 12px; }
+  .item-body p:last-child { margin:0; }
+  .item-body ul { list-style:none; padding:0; margin:0 0 12px; }
+  .item-body ul li { padding-left:16px; position:relative; margin-bottom:7px; line-height:1.7; }
+  .item-body ul li::before { content:"•"; position:absolute; left:0; color:var(--rust); font-size:10px; top:3px; }
+  .item-body strong { font-weight:600; color:var(--rust); font-style:normal; }
+
+  /* highlighted date/key info */
+  .item-body .highlight {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--rust);
+    display: block;
+    margin-bottom: 12px;
+    opacity: 0.7;
+  }
+
+  .event-sub {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 4px;
+    margin-top: 14px;
+    opacity: 0.7;
+  }
+  .event-sub:first-child { margin-top:0; }
+
+  .item-link { display:inline-block; margin-top:14px; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:var(--rust); text-decoration:none; border-bottom:1px solid var(--rust); padding-bottom:1px; }
+
+  /* ── PRACTICAL SECTION ── */
+  .practical-section {
+    border-top: 1px solid var(--divider);
+    border-bottom: 1px solid var(--divider);
+    background: var(--sand);
+    padding: 50px 0;
+    margin: 0;
+  }
+
+  .practical-inner { max-width:100%; margin:0; padding:0 80px; }
+
+  .practical-inner .section-header { margin-top: 0; }
+
+  .practical-body { font-size:16px; line-height:1.85; color:var(--dark); max-width:720px; }
+  .practical-body p { margin:0 0 12px; }
+
+  /* ── CLOSING ── */
+  .closing {
+    text-align: center;
+    padding: 70px 20px;
+  }
+
+  .closing p { font-style:italic; font-size:22px; color:var(--dark); margin-bottom:14px; }
+
+  .closing-meta {
+    font-size:11px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--muted);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+    margin-bottom:28px;
+  }
+
+  .closing-dot { color:var(--rust); font-size:8px; }
+
+  .closing-divider img { width:160px; mix-blend-mode:multiply; }
+
+  /* ── FOOTER ── */
+  footer { background:var(--white); padding:28px 0; border-top:1px solid var(--divider); }
+  .footer-inner { display:flex; justify-content:center; align-items:center; flex-wrap:wrap; }
+  .footer-name-text { font-family:'Playfair Display',serif; font-size:15px; display:block; text-align:center; }
+  .footer-sub { font-size:11px; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); display:block; text-align:center; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    .nav { grid-template-columns:auto 1fr; padding:16px 24px; }
+    .nav-logo { display:none; }
+    .nav-links { display:none; }
+    .nav-right { display:none; }
+    .hamburger { display:flex; order:-1; }
+
+    .page-header { grid-template-columns:1fr; padding:36px 24px 40px; }
+    .page-header h1 { font-size:72px; }
+    .page-header-flower { display:none; }
+    .page-header p { max-width:100%; }
+
+    .page-body { padding:0 24px 60px; }
+    .practical-inner { padding:0 24px; }
+
+    .faq-grid { grid-template-columns:1fr; }
+
+    .footer-inner { flex-direction:column; gap:16px; text-align:center; }
+    .footer-inner > div { margin-left:0 !important; }
+    .footer-inner > div:nth-child(2) { display:none !important; }
+    .footer-inner > div[style*="border-left"] { border-left:none !important; padding-left:0 !important; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMobileMenu()">✕</button>
+  <a href="nahira-manuel.html" onclick="closeMobileMenu()">Home</a>
+  <a href="weekend.html" onclick="closeMobileMenu()">Weekend</a>
+  <a href="travel.html" onclick="closeMobileMenu()">Travel &amp; Stay</a>
+  <a href="faq.html" onclick="closeMobileMenu()">FAQ</a>
+  <a href="nahira-manuel.html#rsvp" onclick="closeMobileMenu()">RSVP</a>
+  <a href="#" onclick="closeMobileMenu()">Registry</a>
+  <a href="#" onclick="closeMobileMenu()">Things to Do</a>
+  <div style="font-size:13px; letter-spacing:2px; color:var(--muted);">EN &nbsp;|&nbsp; ES &nbsp;|&nbsp; DE</div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="nahira-manuel.html">Nahira &amp; Manuel</a>
+  <div class="nav-links">
+    <a href="nahira-manuel.html">Home</a>
+    <a href="weekend.html">Weekend</a>
+    <a href="travel.html">Travel &amp; Stay</a>
+    <a href="faq.html" class="active">FAQ</a>
+    <a href="nahira-manuel.html#rsvp">RSVP</a>
+  </div>
+  <div class="nav-right">EN &nbsp;|&nbsp; ES &nbsp;|&nbsp; DE</div>
+  <div class="hamburger" onclick="openMobileMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div>
+    <div class="page-header-label">Frequently Asked Questions</div>
+    <h1>FAQ</h1>
+    <div class="header-divider">
+      <div class="header-divider-line"></div>
+      <div class="header-divider-diamond">◆</div>
+      <div class="header-divider-line"></div>
+    </div>
+    <p>A few helpful things to know before we all meet in Mexico.</p>
+  </div>
+  <div class="page-header-flower">
+    <img src="website images/faq-flower.png" alt="">
+  </div>
+</div>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <!-- THE WEEKEND -->
+  <div class="section-header">
+    <div class="section-title">The Weekend</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="faq-grid">
+
+    <div class="faq-item">
+      <div class="item-header">
+        <div class="item-title">RSVP</div>
+      </div>
+      <div class="item-body">
+        <span class="highlight">October 1st, 2026</span>
+        <p>Please RSVP by this date so we can finalise transportation, seating, and all the little details that make the weekend run smoothly.</p>
+        <a class="item-link" href="nahira-manuel.html#rsvp">RSVP here →</a>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="item-header">
+        <div class="item-title">Dress Code</div>
+      </div>
+      <div class="item-body">
+        <div class="event-sub">Welcome Cocktail — Friday</div>
+        <p>Cocktail attire.</p>
+        <div class="event-sub">Wedding — Saturday</div>
+        <p>Formal or Guayabera.</p>
+        <p>A couple of practical notes:</p>
+        <ul>
+          <li>The ceremony and celebrations will take place across the hacienda gardens and cobblestone paths</li>
+          <li>We highly recommend block heels, wedges, or flats over stilettos</li>
+          <li>Comfort is key — there will be lots of walking, dancing, and celebrating</li>
+        </ul>
+        <a class="item-link" href="#" target="_blank">Pinterest inspiration board →</a>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="item-header">
+        <div class="item-title">Shuttles</div>
+      </div>
+      <div class="item-body">
+        <p>We'll be organising transportation throughout the entire weekend from the recommended hotels.</p>
+        <div class="event-sub">Friday</div>
+        <ul>
+          <li>Mexico City → Morelos (12:00–15:00)</li>
+          <li>Hotels → Venue (16:00)</li>
+        </ul>
+        <div class="event-sub">Saturday</div>
+        <ul>
+          <li>Hotels → Venue (13:00)</li>
+          <li>Return shuttles from 19:00 onwards</li>
+        </ul>
+        <div class="event-sub">Sunday</div>
+        <ul>
+          <li>Hotels → Mexico City (13:00)</li>
+        </ul>
+        <p>Please let us know your shuttle plans when you RSVP.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="item-header">
+        <div class="item-title">What if I can't stay at a recommended hotel?</div>
+      </div>
+      <div class="item-body">
+        <p>No worries at all — we simply recommend staying somewhere around Tequesquitengo so you remain close to the shuttle routes.</p>
+        <ul>
+          <li>Ask your hotel to arrange transport to one of the shuttle hotels</li>
+          <li>We strongly recommend avoiding taxis directly to the venue</li>
+        </ul>
+        <a class="item-link" href="https://wa.me/YOURNUMBER" target="_blank">Contact us on WhatsApp →</a>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="item-header">
+        <div class="item-title">Weather at the Venue</div>
+      </div>
+      <div class="item-body">
+        <p>Even though it's December, Morelos stays warm and sunny during the day.</p>
+        <ul>
+          <li>Daytime temperatures can reach around 30°C</li>
+          <li>Evenings cool down to around 12°C</li>
+        </ul>
+        <p>Light clothing during the day, a jacket or shawl for the evening.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="item-header">
+        <div class="item-title">Can I bring children?</div>
+      </div>
+      <div class="item-body">
+        <p>We love your little ones — please reach out to us directly so we can discuss arrangements and make sure everyone is comfortable throughout the weekend.</p>
+        <a class="item-link" href="https://wa.me/YOURNUMBER" target="_blank">Message us on WhatsApp →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PARKING — full width -->
+  <div class="faq-full">
+    <div class="item-header">
+      <div class="item-title">Parking at the Venue</div>
+    </div>
+    <div class="item-body">
+      <p>We do not recommend bringing a car to the wedding weekend. That said, parking is available within the venue.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- PRACTICAL SECTION -->
+<div class="practical-section">
+  <div class="practical-inner">
+    <div class="section-header" style="margin-top:0;">
+      <div class="section-title">Practical</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="practical-body">
+      <p>We've put together a full practical guide with everything you might need during your trip — from exchanging money and staying connected to getting around Mexico comfortably and safely.</p>
+      <p>You'll also find recommendations for avoiding the infamous "Moctezuma's Revenge." We would very much prefer you spend the weekend dancing instead of recovering.</p>
+      <a class="item-link" href="travel.html">Visit Travel &amp; Stay →</a>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE BODY CONTINUED: OTHER -->
+<div class="page-body">
+
+  <div class="section-header">
+    <div class="section-title">Other</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="faq-grid">
+
+    <div class="faq-item">
+      <div class="item-header">
+        <div class="item-title">Wedding Registry</div>
+      </div>
+      <div class="item-body">
+        <p>Your presence at our wedding is truly the greatest gift to us.</p>
+        <p>That said, if you insist — registry details are coming. We'll share them when we've figured out what we actually need (turns out getting married is distracting).</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="item-header">
+        <div class="item-title">Where should I visit after the wedding?</div>
+      </div>
+      <div class="item-body">
+        <p>Mexico is one of our favourite places in the world and we've put together plenty of recommendations for anyone planning to continue travelling after the wedding.</p>
+        <p>From Oaxaca and Baja California Sur to beaches, mezcal, and food spots — you can find everything in the Things to Do section.</p>
+        <a class="item-link" href="#">Things to Do →</a>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="item-header">
+        <div class="item-title">Time Zone</div>
+      </div>
+      <div class="item-body">
+        <p>Mexico City and Morelos operate on Central Standard Time (CST / UTC-6).</p>
+        <p>Worth keeping in mind when booking flights and coordinating arrival times.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- STILL HAVE QUESTIONS — full width with flower -->
+  <div style="display:grid; grid-template-columns:2fr 1fr; gap:16px; align-items:center; margin-bottom:16px;">
+    <div class="faq-item" style="height:100%;">
+      <div class="item-header">
+        <div class="item-title">Still have questions?</div>
+      </div>
+      <div class="item-body">
+        <p>If there's anything you're unsure about, please don't hesitate to reach out. We're always happy to help.</p>
+        <a class="item-link" href="https://wa.me/YOURNUMBER" target="_blank">Message us on WhatsApp →</a>
+      </div>
+    </div>
+    <div style="display:flex; align-items:flex-end; justify-content:flex-end; overflow:hidden; height:200px;">
+      <img src="website images/faq-flower-bottom.png" alt="" style="height:200px; width:auto; mix-blend-mode:multiply;">
+    </div>
+  </div>
+
+</div>
+
+<!-- CLOSING -->
+<div style="border-top: 1px solid var(--divider);"></div>
+<div class="closing">
+  <p>We can't wait to celebrate with you.</p>
+  <div class="closing-meta">
+    <span>December 4–6, 2026</span>
+    <span class="closing-dot">◆</span>
+    <span>Hacienda San Gabriel de las Palmas</span>
+    <span class="closing-dot">◆</span>
+    <span>Morelos, Mexico</span>
+  </div>
+  <div class="closing-divider">
+    <img src="website images/welcom.png" alt="">
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div style="text-align:center;">
+      <span class="footer-name-text">Nahira &amp; Manuel</span>
+      <span class="footer-sub">December 2026</span>
+    </div>
+    <div style="display:flex; align-items:center; margin-left:50px; gap:28px;">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <line x1="9" y1="0" x2="9" y2="18" stroke="#cfc7bc" stroke-width="1.2"/>
+        <line x1="0" y1="9" x2="18" y2="9" stroke="#cfc7bc" stroke-width="1.2"/>
+        <line x1="2.2" y1="2.2" x2="15.8" y2="15.8" stroke="#cfc7bc" stroke-width="1.2"/>
+        <line x1="15.8" y1="2.2" x2="2.2" y2="15.8" stroke="#cfc7bc" stroke-width="1.2"/>
+      </svg>
+      <a href="#" style="text-decoration:none; color:var(--dark); font-size:12px; letter-spacing:2.5px; text-transform:uppercase;">Registry</a>
+      <a href="#" style="text-decoration:none; color:var(--dark); font-size:12px; letter-spacing:2.5px; text-transform:uppercase;">Things to Do</a>
+    </div>
+    <div style="display:flex; align-items:center; margin-left:28px; border-left:1px solid var(--divider); padding-left:28px;">
+      <a href="https://wa.me/YOURNUMBER" target="_blank" style="display:flex; align-items:center;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function openMobileMenu() { document.getElementById('mobileMenu').classList.add('open'); }
+  function closeMobileMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
+</script>
+
+</body>
+</html>
